@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Discord Stage • $STAGE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Discord Stage ($STAGE) is the memecoin powered by late night stage chats and unmuted chaos." />
+
+  <!-- Font (free) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0f18;
+      --bg-soft: #151b29;
+      --accent: #34b558;
+      --accent-soft: rgba(52,181,88,0.18);
+      --accent-alt: #5865f2;
+      --text: #ffffff;
+      --muted: #9ea7c2;
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 16px 40px rgba(0,0,0,0.45);
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, #151b29 0, #05070c 40%, #020308 100%);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 18px 40px;
+    }
+
+    /* Header */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(7,10,18,0.98);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 14px;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+
+    .logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--accent);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      font-size: 17px;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    nav a {
+      padding: 6px 11px;
+      border-radius: 999px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-mini {
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #020308;
+      font-weight: 700;
+      font-size: 12px;
+      box-shadow: 0 8px 18px rgba(52,181,88,0.45);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .btn-mini:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.6);
+      background: #3edb6c;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 26px;
+      margin-top: 34px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 480px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 16px 0 18px;
+      font-size: 11px;
+    }
+
+    .pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(10,14,22,0.96);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .pill span {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-main {
+      padding: 11px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #020308;
+      font-weight: 800;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 16px 42px rgba(52,181,88,0.5);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 54px rgba(0,0,0,0.8);
+      background: #3edb6c;
+    }
+
+    .btn-ghost {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(18,24,38,0.98);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .btn-ghost span.icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .btn-ghost:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .hero-note {
+      margin-top: 10px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .card-screen {
+      padding: 18px 16px 16px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(160deg, #151b29 0%, #060912 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .card-label {
+      font-size: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.6);
+      color: var(--muted);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ff4f7b;
+      box-shadow: 0 0 12px #ff4f7b;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .stage-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .stage-sub {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .listeners {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 6px;
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .bubble {
+      padding: 7px 8px;
+      border-radius: var(--radius-lg);
+      background: rgba(7,10,18,0.98);
+      border: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bubble strong {
+      font-size: 9px;
+      color: var(--accent);
+    }
+
+    .bubble span.line {
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    .stage-footer {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    .stage-btn {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #020308;
+      font-weight: 700;
+      font-size: 9px;
+      box-shadow: 0 8px 20px rgba(52,181,88,0.4);
+    }
+
+    /* Sections */
+
+    section {
+      margin-top: 46px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      max-width: 620px;
+    }
+
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .card {
+      flex: 1 1 220px;
+      padding: 16px 14px 14px;
+      border-radius: var(--radius-lg);
+      background: rgba(10,14,22,0.98);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .card h3 {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .tokenomics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .t-box {
+      padding: 9px 10px 8px;
+      border-radius: 14px;
+      background: rgba(5,8,14,0.98);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .t-label {
+      font-size: 9px;
+      color: var(--accent-alt);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .t-value {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 3px;
+    }
+
+    .how-steps {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .how-steps li {
+      padding: 10px 10px 9px;
+      border-radius: 14px;
+      background: rgba(7,10,18,0.98);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .how-steps span.step {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #020308;
+      font-weight: 800;
+      font-size: 9px;
+      margin-right: 6px;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 8px;
+      background: rgba(88,101,242,0.14);
+      color: var(--accent-alt);
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    .links a {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(7,10,18,0.98);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      transition: all var(--transition-fast);
+    }
+
+    .links a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.6);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 14px 0 4px;
+      font-size: 9px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer span {
+      color: #ff4f7b;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      header {
+        gap: 10px;
+      }
+      nav {
+        display: none;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Top Nav -->
+
+  <header>
+    <div class="logo-wrap">
+      <div class="logo-icon">
+        <!-- Discord Stage logo based on provided image -->
+        <svg viewBox="0 0 321 320" aria-hidden="true">
+          <path d="M160.5 50a110 110 0 0 0-78 32.3 12 12 0 1 1-17-17A134 134 0 0 1 160.5 26c36 0 69.8 14 95.3 39.5a134 134 0 0 1 39.4 95.3 12 12 0 1 1-24 0c0-29.7-11.6-57.7-32.7-78.8A110 110 0 0 0 160.5 50zM160.5 98a62 62 0 0 0-44 18.2 12 12 0 0 1-17-17 86 86 0 0 1 120 0 85.7 85.7 0 0 1 25.1 60.6 12 12 0 1 1-24 0c0-16.1-6.4-31.3-17.6-42.5A62 62 0 0 0 160.5 98zM160.5 142a32 32 0 0 1 22.6 54.6l17.2 44.3a10 10 0 0 1-9.3 13.5h-61a10 10 0 0 1-9.3-13.5l17.2-44.3A32 32 0 0 1 160.5 142z"/>
+        </svg>
+      </div>
+      <div class="logo-text">$STAGE</div>
+    </div>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#howtobuy">How to buy</a>
+      <a href="#roadmap">Stage plan</a>
+      <a href="#links">Links</a>
+    </nav>
+
+    <a href="#howtobuy" class="btn-mini">$STAGE live soon</a>
+  </header>
+
+  <!-- Hero -->
+
+  <section class="hero">
+    <div>
+      <div class="pill">
+        <span></span>
+        Discord Stage Memecoin
+      </div>
+
+      <h1 class="hero-title">
+        <span>Discord Stage</span> is the coin of unmuted nights.
+      </h1>
+
+      <p class="hero-sub">
+        $STAGE is for the ones who never leave voice, talk over the host,
+        forget to mute, and somehow end up running the show.
+        A memecoin born from real stage chaos with real friends.
+      </p>
+
+      <div class="hero-tags">
+        <div class="pill">No dev ego</div>
+        <div class="pill">Stage vibes only</div>
+        <div class="pill">Community first</div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#howtobuy" class="btn-main">Buy $STAGE</a>
+        <a href="#links" class="btn-ghost">
+          <span class="icon"></span>
+          Join live stage
+        </a>
+      </div>
+
+      <div class="hero-note">
+        For entertainment. Not financial advice. Do not spend what you cannot lose.
+      </div>
+    </div>
+
+    <!-- Right side fake Discord stage preview -->
+
+    <div class="card-screen">
+      <div class="card-header">
+        <div>
+          <div class="stage-title">
+            <span class="live-dot"></span> Discord Stage • $STAGE
+          </div>
+          <div class="stage-sub">Unmuted community stage is live now.</div>
+        </div>
+        <div class="card-label">Listeners 382</div>
+      </div>
+
+      <div class="listeners">
+        <div class="bubble">
+          <strong>Host • Ajay</strong>
+          <span class="line">$STAGE is powered by actual late night degenerates.</span>
+        </div>
+        <div class="bubble">
+          <strong>Mod • Lurker</strong>
+          <span class="line">If you are muted you are bullish. Speak up.</span>
+        </div>
+        <div class="bubble">
+          <strong>Whale • StageGig</strong>
+          <span class="line">I bought because my mic was already on.</span>
+        </div>
+        <div class="bubble">
+          <strong>Caller • Pepe</strong>
+          <span class="line">Chart looks like my sleep schedule.</span>
+        </div>
+        <div class="bubble">
+          <strong>OG • StageRat</strong>
+          <span class="line">No website builders. Pure stage energy.</span>
+        </div>
+        <div class="bubble">
+          <strong>DJ • Loop</strong>
+          <span class="line">Next song is the next candle.</span>
+        </div>
+      </div>
+
+      <div class="stage-footer">
+        <div>Stage: <strong>$STAGE Community Hangout</strong></div>
+        <div class="stage-btn">Request to speak</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+
+  <section id="about">
+    <h2 class="section-title">What is Discord Stage</h2>
+    <p class="section-sub">
+      A memecoin for people who live on stage chat. No fake suits.
+      No silent founders. Just voices, memes and a simple idea:
+      if we spend all night screaming into mics together, we might as well
+      have a coin that represents it.
+    </p>
+
+    <div class="flex">
+      <div class="card">
+        <h3>Community powered</h3>
+        Holders are the panel. If you are in the call, you are in the story.
+      </div>
+      <div class="card">
+        <h3>Low effort, high energy</h3>
+        Lightweight site, real Discord culture, no bloated promises.
+      </div>
+      <div class="card">
+        <h3>Stage culture</h3>
+        Clips, call recaps, live reactions and unfiltered stage moments
+        fuel the memes behind $STAGE.
+      </div>
+    </div>
+  </section>
+
+  <!-- Tokenomics -->
+
+  <section id="tokenomics">
+    <h2 class="section-title">Tokenomics</h2>
+    <p class="section-sub">
+      Edit this to match your actual deployment numbers.
+      Keep it transparent and readable so people know what they are entering.
+    </p>
+
+    <div class="tokenomics-grid">
+      <div class="t-box">
+        <div class="t-label">Total supply</div>
+        <div class="t-value">1 000 000 000 $STAGE</div>
+        <div>Fixed. No hidden mint.</div>
+      </div>
+      <div class="t-box">
+        <div class="t-label">Liquidity</div>
+        <div class="t-value">xx%</div>
+        <div>Locked. Link to proof once live.</div>
+      </div>
+      <div class="t-box">
+        <div class="t-label">Stage fund</div>
+        <div class="t-value">xx%</div>
+        <div>For raids, guests, calls, memes.</div>
+      </div>
+      <div class="t-box">
+        <div class="t-label">Team</div>
+        <div class="t-value">0% / or small</div>
+        <div>Your choice. Be clear and honest.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Buy -->
+
+  <section id="howtobuy">
+    <h2 class="section-title">How to get $STAGE</h2>
+    <p class="section-sub">
+      Replace addresses with your real contract and links.
+      Keep it simple so even the half asleep stage listeners can follow.
+    </p>
+
+    <ul class="how-steps">
+      <li>
+        <span class="step">1</span>
+        Choose wallet that supports your chain.
+        Example: Phantom, MetaMask, Rabby etc.
+      </li>
+      <li>
+        <span class="step">2</span>
+        Load with chain token (SOL, ETH or whatever you launch on).
+      </li>
+      <li>
+        <span class="step">3</span>
+        Go to your chosen DEX and paste the official $STAGE contract:
+        <strong>PASTE_OFFICIAL_CONTRACT_HERE</strong>
+      </li>
+      <li>
+        <span class="step">4</span>
+        Confirm you are on the correct pair and buy.
+        Share your entry live on the stage.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Roadmap -->
+
+  <section id="roadmap">
+    <h2 class="section-title">Stage plan</h2>
+    <p class="section-sub">
+      This is not corporate style. It is a simple call outline of what the community wants to do.
+      Adjust it when things actually happen.
+    </p>
+
+    <div class="roadmap-grid">
+      <div class="card">
+        <h3>Phase One • Open mic</h3>
+        Launch $STAGE.
+        Lock liquidity.
+        First non stop voice call.
+        Spam memes everywhere.
+        <div class="tag">Live</div>
+      </div>
+      <div class="card">
+        <h3>Phase Two • Stage clips</h3>
+        Daily stage sessions.
+        Clip best moments.
+        Share across socials and onboard more callers.
+        <div class="tag">Next</div>
+      </div>
+      <div class="card">
+        <h3>Phase Three • Guests only</h3>
+        Host projects, creators, traders.
+        Stage raids, collabs, and community events.
+        <div class="tag">Soon</div>
+      </div>
+      <div class="card">
+        <h3>Phase Four • Whatever stage wants</h3>
+        Community voting live on stage.
+        If the holders shout it loud enough, it enters the plan.
+      </div>
+    </div>
+  </section>
+
+  <!-- Links -->
+
+  <section id="links">
+    <h2 class="section-title">Links and socials</h2>
+    <p class="section-sub">
+      Replace placeholders when you have real links.
+      You can also embed your Discord widget here if you want.
+    </p>
+    <div class="links">
+      <a href="https://discord.com" target="_blank" rel="noopener">Discord server</a>
+      <a href="https://x.com" target="_blank" rel="noopener">X (Twitter)</a>
+      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+      <a href="#">DEX link</a>
+      <a href="#">Contract scan</a>
+      <!-- Example: Discord widget embed (swap YOUR_SERVER_ID) -->
+      <!-- <iframe src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark" width="350" height="200" allowtransparency="true" frameborder="0"></iframe> -->
+    </div>
+  </section>
+
+  <footer>
+    Discord Stage ($STAGE) is a meme project built for fun voice chats.
+    No promises of profit.
+    Always <span>mute</span> before you market buy.
+  </footer>
+</div>
+</body>
+</html>
